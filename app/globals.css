@@ -92,3 +92,41 @@ p {
   font-size: 1rem;
   margin: 0;
 }
+.hero {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: 7vw;
+}
+
+.heroImage {
+  object-fit: cover;
+  z-index: 0;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(247, 241, 230, 0.14),
+    rgba(247, 241, 230, 0.78)
+  );
+  z-index: 1;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  max-width: 940px;
+}
+
+.motto {
+  font-size: clamp(1.15rem, 2.2vw, 1.8rem);
+  line-height: 1.45;
+  max-width: 720px;
+  color: #2c291f;
+}
