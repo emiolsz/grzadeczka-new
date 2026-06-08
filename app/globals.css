@@ -130,3 +130,19 @@ p {
   max-width: 720px;
   color: #2c291f;
 }
+@media (max-width: 700px) {
+  .section {
+    padding: 72px 24px;
+  }
+
+  .hero {
+    padding: 32px 24px;
+    align-items: flex-end;
+  }
+
+  .searchBox {
+    border-radius: 28px;
+    padding: 18px 20px;
+    font-size: 1rem;
+  }
+}
