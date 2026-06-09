@@ -1,6 +1,5 @@
 :root {
-  --paper: #f7f1e6;
-  --paper-dark: #eee2cf;
+  --paper: #f7f4ee;
   --ink: #1f1d18;
   --muted: #756f63;
   --green: #65704f;
@@ -31,143 +30,6 @@ main {
   min-height: 100vh;
 }
 
-/* INTRO */
-
-.introCycle {
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
-  padding: 7vw;
-  background: var(--paper);
-  position: relative;
-  overflow: hidden;
-  z-index: 5;
-}
-
-.introPaper {
-  width: min(1100px, 100%);
-  min-height: 620px;
-  border: 1px solid var(--line);
-  background:
-    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.72), transparent 28%),
-    linear-gradient(135deg, #fbf5e8, #eee2cf);
-  box-shadow: 0 30px 80px rgba(31, 29, 24, 0.12);
-  display: grid;
-  place-items: center;
-  padding: 48px;
-  position: relative;
-}
-
-.logoWrap {
-  position: relative;
-  width: 100%;
-  text-align: center;
-}
-
-.introLogo {
-  font-size: clamp(3rem, 10vw, 8.5rem);
-  line-height: 0.9;
-  font-weight: 400;
-  letter-spacing: -0.04em;
-  margin: 0;
-  position: relative;
-  z-index: 2;
-}
-
-.peaVine {
-  position: absolute;
-  left: 2%;
-  right: 2%;
-  top: 48%;
-  width: 96%;
-  height: 260px;
-  z-index: 3;
-  pointer-events: none;
-}
-
-.vinePath,
-.tendril {
-  fill: none;
-  stroke: #52623f;
-  stroke-width: 5;
-  stroke-linecap: round;
-  stroke-dasharray: 1400;
-  stroke-dashoffset: 1400;
-  animation: growLine 3s ease forwards;
-}
-
-.tendril {
-  stroke-width: 3;
-  animation-delay: 1.4s;
-}
-
-.leaf {
-  fill: #65704f;
-  opacity: 0;
-  animation: appear 0.8s ease forwards;
-}
-
-.l1 {
-  animation-delay: 1.8s;
-}
-
-.l2 {
-  animation-delay: 2.2s;
-}
-
-.l3 {
-  animation-delay: 2.6s;
-}
-
-.flower {
-  fill: #fffaf0;
-  stroke: #d8cdb8;
-  stroke-width: 2;
-  opacity: 0;
-  animation: flowerCycle 5.5s ease forwards;
-}
-
-.f1 {
-  animation-delay: 3s;
-}
-
-.f2 {
-  animation-delay: 3.4s;
-}
-
-.f3 {
-  animation-delay: 3.8s;
-}
-
-.bee {
-  fill: #2b2418;
-  opacity: 0;
-  animation: beeMove 3.4s ease forwards;
-  animation-delay: 4.1s;
-}
-
-.pod {
-  fill: #708655;
-  opacity: 0;
-  animation: appear 1s ease forwards;
-  animation-delay: 6.3s;
-}
-
-.dryPod {
-  fill: #9a7a4c;
-  animation-delay: 7.4s;
-}
-
-.introMotto {
-  text-align: center;
-  font-size: clamp(1.15rem, 2.4vw, 1.9rem);
-  line-height: 1.55;
-  margin-top: 120px;
-  opacity: 0;
-  animation: appear 1.4s ease forwards;
-  animation-delay: 7.8s;
-}
-
 /* HERO */
 
 .hero {
@@ -183,39 +45,34 @@ main {
 .heroImage {
   object-fit: cover;
   z-index: 0;
-  animation: heroReveal 2.4s ease forwards;
+  opacity: 0;
+  filter: blur(20px) saturate(0.8);
+  transform: scale(1.08);
+  animation: naturalHeroReveal 5.8s ease forwards;
 }
 
 .hero::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(247, 241, 230, 0.12),
-    rgba(247, 241, 230, 0.76)
-  );
   z-index: 1;
+  background:
+    linear-gradient(
+      to right,
+      rgba(247, 244, 238, 0.94) 0%,
+      rgba(247, 244, 238, 0.72) 42%,
+      rgba(247, 244, 238, 0.2) 100%
+    );
 }
 
 .heroContent {
   position: relative;
   z-index: 2;
-  max-width: 940px;
-}
-
-.motto {
-  font-size: clamp(1.15rem, 2.2vw, 1.8rem);
-  line-height: 1.45;
-  max-width: 720px;
-  color: #2c291f;
-}
-
-/* GENERAL SECTIONS */
-
-.section {
-  padding: 96px 7vw;
-  border-bottom: 1px solid var(--line);
+  max-width: 780px;
+  opacity: 0;
+  transform: translateY(18px);
+  animation: editorialTextIn 2.4s ease forwards;
+  animation-delay: 1.1s;
 }
 
 .label {
@@ -226,34 +83,55 @@ main {
 }
 
 h1 {
-  font-size: clamp(3rem, 9vw, 8rem);
-  line-height: 0.9;
+  font-size: clamp(4rem, 10vw, 9rem);
+  line-height: 0.86;
   margin: 0;
   font-weight: 400;
+  letter-spacing: -0.055em;
+}
+
+.motto {
+  margin-top: 28px;
+  font-size: clamp(1.15rem, 2.2vw, 1.8rem);
+  line-height: 1.45;
+  max-width: 720px;
+  color: rgba(31, 29, 24, 0.78);
+}
+
+.searchBox {
+  margin-top: 40px;
+  max-width: 760px;
+  border: 1px solid rgba(31, 29, 24, 0.12);
+  padding: 22px 26px;
+  border-radius: 999px;
+  background: rgba(247, 244, 238, 0.76);
+  color: var(--muted);
+  font-size: 1.1rem;
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  transform: translateY(12px);
+  animation: editorialTextIn 1.8s ease forwards;
+  animation-delay: 3.2s;
+}
+
+/* SEKCJE */
+
+.section {
+  padding: 96px 7vw;
+  border-bottom: 1px solid var(--line);
 }
 
 h2 {
   font-size: clamp(2rem, 5vw, 4.5rem);
   font-weight: 400;
   margin: 0 0 24px;
+  letter-spacing: -0.03em;
 }
 
 p {
   font-size: 1.1rem;
   line-height: 1.7;
   max-width: 760px;
-}
-
-.searchBox {
-  margin-top: 40px;
-  max-width: 760px;
-  border: 1px solid var(--line);
-  padding: 22px 26px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.45);
-  color: var(--muted);
-  font-size: 1.1rem;
-  backdrop-filter: blur(8px);
 }
 
 .grid {
@@ -265,7 +143,7 @@ p {
 
 .card {
   border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.32);
+  background: rgba(255, 255, 255, 0.34);
   padding: 28px;
   min-height: 180px;
 }
@@ -281,106 +159,57 @@ p {
   margin: 0;
 }
 
-/* ANIMATIONS */
+/* ANIMACJE */
 
-@keyframes growLine {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-@keyframes appear {
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes flowerCycle {
+@keyframes naturalHeroReveal {
   0% {
     opacity: 0;
-    transform: scale(0.4);
+    filter: blur(22px) saturate(0.75);
+    transform: scale(1.1);
   }
 
-  25% {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  70% {
-    opacity: 1;
+  45% {
+    opacity: 0.72;
   }
 
   100% {
-    opacity: 0.35;
-    transform: scale(0.82);
-  }
-}
-
-@keyframes beeMove {
-  0% {
-    opacity: 0;
-    transform: translate(-220px, 40px);
-  }
-
-  20% {
     opacity: 1;
-  }
-
-  55% {
-    transform: translate(0, 0);
-  }
-
-  100% {
-    opacity: 0;
-    transform: translate(240px, 30px);
+    filter: blur(0) saturate(1);
+    transform: scale(1);
   }
 }
 
-@keyframes heroReveal {
-  from {
-    opacity: 0;
-    filter: blur(18px);
-    transform: scale(1.04);
-  }
-
+@keyframes editorialTextIn {
   to {
     opacity: 1;
-    filter: blur(0);
-    transform: scale(1);
+    transform: translateY(0);
   }
 }
 
 /* MOBILE */
 
 @media (max-width: 700px) {
-  .section {
-    padding: 72px 24px;
-  }
-
-  .introCycle {
-    padding: 24px;
-  }
-
-  .introPaper {
-    min-height: 560px;
-    padding: 28px;
-  }
-
-  .peaVine {
-    top: 52%;
-    left: 0;
-    right: 0;
-    width: 100%;
-    height: 220px;
-  }
-
-  .introMotto {
-    margin-top: 100px;
-  }
-
   .hero {
     padding: 32px 24px;
     align-items: flex-end;
+  }
+
+  .hero::after {
+    background:
+      linear-gradient(
+        to top,
+        rgba(247, 244, 238, 0.96) 0%,
+        rgba(247, 244, 238, 0.74) 48%,
+        rgba(247, 244, 238, 0.22) 100%
+      );
+  }
+
+  h1 {
+    font-size: clamp(3.4rem, 18vw, 6rem);
+  }
+
+  .section {
+    padding: 72px 24px;
   }
 
   .searchBox {
