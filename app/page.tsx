@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { plants } from "@/data/plants";
+import { plants } from "../data/plants";
 
 export default function HomePage() {
   const [query, setQuery] = useState("");
