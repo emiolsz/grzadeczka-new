@@ -38,7 +38,7 @@ export const plants: Plant[] = [
     latinName: "Urtica dioica",
     family: "Pokrzywowate",
     type: "Roślina zielna",
-    cardImage: "/cards/pokrzywa-zwyczajna.png",
+    cardImage: "/images/cards/pokrzywa-zwyczajna.webp",
 
     shortDescription:
       "Pokrzywa zwyczajna to roślina żyznych, wilgotnych miejsc. Łatwo ją rozpoznać po piłkowanych liściach i parzących włoskach.",
