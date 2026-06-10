@@ -44,8 +44,6 @@ export default function HomePage() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="🔍 Wpisz nazwę rośliny, np. pokrzywa, chaber, babka..."
-            <input
-/>
           />
         </div>
       </section>
@@ -53,6 +51,7 @@ export default function HomePage() {
       {foundPlant && (
         <section className="section plantPackage">
           <p className="label">Pakiet gatunku</p>
+
           <h2>{foundPlant.name}</h2>
 
           <p>
@@ -72,6 +71,7 @@ export default function HomePage() {
           <p>{foundPlant.shortDescription}</p>
 
           <h3>Właściwości</h3>
+
           <ul>
             {foundPlant.properties.map((item) => (
               <li key={item}>{item}</li>
@@ -79,6 +79,7 @@ export default function HomePage() {
           </ul>
 
           <h3>Jak ją wykorzystać?</h3>
+
           {foundPlant.uses.map((use) => (
             <article className="card" key={use.title}>
               <h4>{use.title}</h4>
@@ -87,12 +88,15 @@ export default function HomePage() {
           ))}
 
           <h3>Rozwiąż problem</h3>
+
           {foundPlant.problems.map((problem) => (
             <article className="card" key={problem.title}>
               <h4>{problem.title}</h4>
+
               <p>{problem.symptoms}</p>
 
               <strong>Możliwe przyczyny:</strong>
+
               <ul>
                 {problem.causes.map((cause) => (
                   <li key={cause}>{cause}</li>
@@ -100,6 +104,7 @@ export default function HomePage() {
               </ul>
 
               <strong>Co zrobić:</strong>
+
               <ul>
                 {problem.whatToDo.map((step) => (
                   <li key={step}>{step}</li>
@@ -111,6 +116,7 @@ export default function HomePage() {
           {foundPlant.story && (
             <>
               <h3>Opowieść</h3>
+
               <p>
                 {foundPlant.story.title} · {foundPlant.story.type}
               </p>
@@ -118,7 +124,12 @@ export default function HomePage() {
           )}
 
           {foundPlant.grzadeczkaUrl && (
-            <a className="button" href={foundPlant.grzadeczkaUrl}>
+            <a
+              className="button"
+              href={foundPlant.grzadeczkaUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Zapytaj Grządeczkę
             </a>
           )}
