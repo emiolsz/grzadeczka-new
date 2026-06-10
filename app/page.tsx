@@ -1,21 +1,19 @@
-import Image from "next/image";
+"use client";
 
-const plants = [
-  {
-    name: "Pokrzywa",
-    text: "Karta botaniczna, funkcje w ogrodzie, przepisy, opowieści i powiązania ekosystemowe.",
-  },
-  {
-    name: "Dynia",
-    text: "Gatunek + problem: żółte liście, brak kwitnienia, owoce nie rosną.",
-  },
-  {
-    name: "Mak",
-    text: "Roślina krajobrazu, pamięci, zapylaczy i delikatnych pól.",
-  },
-];
+import { useState } from "react";
+import Image from "next/image";
+import { plants } from "@/data/plants";
 
 export default function HomePage() {
+  const [query, setQuery] = useState("");
+
+  const foundPlant =
+    query.trim().length > 0
+      ? plants.find((plant) =>
+          plant.name.toLowerCase().includes(query.toLowerCase())
+        )
+      : null;
+
   return (
     <main>
       <section className="hero">
@@ -40,69 +38,95 @@ export default function HomePage() {
             Wzrastaj.
           </p>
 
-          <div className="searchBox">
-            🔍 Wpisz nazwę rośliny, np. pokrzywa, dynia, mak...
-          </div>
+          <input
+            className="searchBox"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="🔍 Wpisz nazwę rośliny, np. pokrzywa, chaber, babka..."
+          />
         </div>
       </section>
 
-      <section className="section">
-        <p className="label">Zachwyć się</p>
-        <h2>Najpierw zobacz.</h2>
-        <p>
-          Grządkowisko zaczyna się od obrazu: łąki, światła, liści,
-          zapachu ziemi i pytania, co właściwie dzieje się wokół nas.
-        </p>
-      </section>
+      {foundPlant && (
+        <section className="section plantPackage">
+          <p className="label">Pakiet gatunku</p>
+          <h2>{foundPlant.name}</h2>
 
-      <section className="section">
-        <p className="label">Obserwuj</p>
-        <h2>Roślina jest początkiem.</h2>
-        <p>
-          Użytkownik nie szuka działu. Wpisuje nazwę rośliny. Dlatego
-          centrum Grządkowiska będzie gatunek i wszystko, co z nim związane.
-        </p>
+          <p>
+            <em>{foundPlant.latinName}</em> · {foundPlant.family} ·{" "}
+            {foundPlant.type}
+          </p>
 
-        <div className="grid">
-          {plants.map((plant) => (
-            <article className="card" key={plant.name}>
-              <h3>{plant.name}</h3>
-              <p>{plant.text}</p>
+          <Image
+            src={foundPlant.cardImage}
+            alt={`Karta botaniczna: ${foundPlant.name}`}
+            width={900}
+            height={1200}
+            className="botanicalCard"
+          />
+
+          <h3>Co to za roślina?</h3>
+          <p>{foundPlant.shortDescription}</p>
+
+          <h3>Właściwości</h3>
+          <ul>
+            {foundPlant.properties.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+
+          <h3>Jak ją wykorzystać?</h3>
+          {foundPlant.uses.map((use) => (
+            <article className="card" key={use.title}>
+              <h4>{use.title}</h4>
+              <p>{use.text}</p>
             </article>
           ))}
-        </div>
-      </section>
 
-      <section className="section">
-        <p className="label">Zrozum</p>
-        <h2>Nie pojedyncze fakty. Zależności.</h2>
-        <p>
-          Pokrzywa zwyczajna nie jest wcale taka zwyczajna — powiedziałabym
-          niezwykła — ze względu na szereg cennych właściwości. Jej obecność
-          uruchamia łańcuch wzajemnych korzyści między glebą, owadami,
-          ptakami. W tym łańcuchu wzajemności jest i człowiek.
-        </p>
-      </section>
+          <h3>Rozwiąż problem</h3>
+          {foundPlant.problems.map((problem) => (
+            <article className="card" key={problem.title}>
+              <h4>{problem.title}</h4>
+              <p>{problem.symptoms}</p>
 
-      <section className="section">
-        <p className="label">Działaj</p>
-        <h2>Alleopatia — Asystent Ogrodnika.</h2>
-        <p>
-          Grządkowisko wyjaśnia świat zależności. Alleopatia pomaga podjąć
-          decyzję: które sąsiedztwo będzie najlepsze dla roślin, które będą się
-          wspierać, a które konkurować.
-        </p>
-      </section>
+              <strong>Możliwe przyczyny:</strong>
+              <ul>
+                {problem.causes.map((cause) => (
+                  <li key={cause}>{cause}</li>
+                ))}
+              </ul>
 
-      <section className="section">
-        <p className="label">Opowieści</p>
-        <h2>Atramentowe Opowieści.</h2>
-        <p>
-          Są rzeczy, które najlepiej zapamiętuje się przez pięknie opowiedziane
-          historie. Opowieści będą prowadzić małych i dużych w barwną krainę
-          roślin.
-        </p>
-      </section>
+              <strong>Co zrobić:</strong>
+              <ul>
+                {problem.whatToDo.map((step) => (
+                  <li key={step}>{step}</li>
+                ))}
+              </ul>
+            </article>
+          ))}
+
+          {foundPlant.story && (
+            <>
+              <h3>Opowieść</h3>
+              <p>
+                {foundPlant.story.title} · {foundPlant.story.type}
+              </p>
+            </>
+          )}
+
+          {foundPlant.grzadeczkaUrl && (
+            <a className="button" href={foundPlant.grzadeczkaUrl}>
+              Zapytaj Grządeczkę
+            </a>
+          )}
+        </section>
+      )}
+
+      {query && !foundPlant && (
+        <section className="section">
+          <p>Nie znalazłam jeszcze tego gatunku w bazie Grządkowiska.</p>
+        </section>
+      )}
 
       <footer className="section">
         <p>© Emilia Olszewska · Grządkowisko</p>
