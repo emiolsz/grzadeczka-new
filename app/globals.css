@@ -49,6 +49,7 @@ main {
   filter: blur(20px) saturate(0.8);
   transform: scale(1.08);
   animation: naturalHeroReveal 5.8s ease forwards;
+  pointer-events: none;
 }
 
 .hero::after {
@@ -56,18 +57,18 @@ main {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background:
-    linear-gradient(
-      to right,
-      rgba(247, 244, 238, 0.94) 0%,
-      rgba(247, 244, 238, 0.72) 42%,
-      rgba(247, 244, 238, 0.2) 100%
-    );
+  pointer-events: none;
+  background: linear-gradient(
+    to right,
+    rgba(247, 244, 238, 0.94) 0%,
+    rgba(247, 244, 238, 0.72) 42%,
+    rgba(247, 244, 238, 0.2) 100%
+  );
 }
 
 .heroContent {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   max-width: 780px;
   opacity: 0;
   transform: translateY(18px);
@@ -98,20 +99,30 @@ h1 {
   color: rgba(31, 29, 24, 0.78);
 }
 
-.searchBox {
+.searchInput {
+  display: block;
   margin-top: 40px;
-  max-width: 760px;
+  width: min(760px, 90vw);
   border: 1px solid rgba(31, 29, 24, 0.12);
   padding: 22px 26px;
   border-radius: 999px;
-  background: rgba(247, 244, 238, 0.76);
-  color: var(--muted);
+  background: rgba(247, 244, 238, 0.86);
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
   font-size: 1.1rem;
   backdrop-filter: blur(10px);
+  outline: none;
+  position: relative;
+  z-index: 10;
+  pointer-events: auto;
   opacity: 0;
   transform: translateY(12px);
   animation: editorialTextIn 1.8s ease forwards;
   animation-delay: 3.2s;
+}
+
+.searchInput::placeholder {
+  color: var(--muted);
 }
 
 /* SEKCJE */
@@ -128,7 +139,20 @@ h2 {
   letter-spacing: -0.03em;
 }
 
-p {
+h3 {
+  font-size: 2rem;
+  font-weight: 400;
+  margin-top: 48px;
+}
+
+h4 {
+  font-size: 1.35rem;
+  font-weight: 400;
+  margin: 0 0 12px;
+}
+
+p,
+li {
   font-size: 1.1rem;
   line-height: 1.7;
   max-width: 760px;
@@ -157,6 +181,27 @@ p {
 .card p {
   font-size: 1rem;
   margin: 0;
+}
+
+.plantPackage {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.botanicalCard {
+  width: min(720px, 100%);
+  height: auto;
+  margin: 40px 0;
+  border: 1px solid var(--line);
+  background: white;
+}
+
+.button {
+  display: inline-block;
+  margin-top: 32px;
+  padding: 16px 24px;
+  border-radius: 999px;
+  background: var(--green);
+  color: white;
 }
 
 /* ANIMACJE */
@@ -195,13 +240,12 @@ p {
   }
 
   .hero::after {
-    background:
-      linear-gradient(
-        to top,
-        rgba(247, 244, 238, 0.96) 0%,
-        rgba(247, 244, 238, 0.74) 48%,
-        rgba(247, 244, 238, 0.22) 100%
-      );
+    background: linear-gradient(
+      to top,
+      rgba(247, 244, 238, 0.96) 0%,
+      rgba(247, 244, 238, 0.74) 48%,
+      rgba(247, 244, 238, 0.22) 100%
+    );
   }
 
   h1 {
@@ -212,27 +256,9 @@ p {
     padding: 72px 24px;
   }
 
-  .searchBox {
+  .searchInput {
     border-radius: 28px;
     padding: 18px 20px;
     font-size: 1rem;
   }
-  .searchInput {
-  width: min(520px, 90vw);
-  padding: 16px 22px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.55);
-  background: rgba(255, 255, 255, 0.82);
-  color: #1f2a1f;
-  font-size: 1rem;
-  outline: none;
-  text-align: center;
-  pointer-events: auto;
-  position: relative;
-  z-index: 10;
-}
-
-.searchInput::placeholder {
-  color: rgba(31, 42, 31, 0.65);
-}
 }
