@@ -39,10 +39,13 @@ export default function HomePage() {
           </p>
 
           <input
-            className="searchBox"
+            type="text"
+            className="searchInput"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="🔍 Wpisz nazwę rośliny, np. pokrzywa, chaber, babka..."
+            <input
+/>
           />
         </div>
       </section>
